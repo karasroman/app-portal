@@ -1,0 +1,52 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Falls Ihr Hauptbranch 'master' heißt, bitte hier anpassen
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular
+        run: npm run build -- --base-href=/stock-portfolio/
+        # WICHTIG: Ersetzen Sie /stock-portfolio/ durch Ihren echten Repository-Namen!
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist/app-portal/browser'
+          # HINWEIS: Bei neueren Angular-Versionen liegt der Build in 'dist/[projektname]/browser'.
+          # Prüfen Sie ggf. lokal nach 'npm run build', wie Ihr Ordner in 'dist' genau heißt!
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
