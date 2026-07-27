@@ -34,8 +34,8 @@ jobs:
         run: npm ci
 
       - name: Build Angular
-        run: npm run build -- --base-href=/stock-portfolio/
-        # WICHTIG: Ersetzen Sie /stock-portfolio/ durch Ihren echten Repository-Namen!
+        run: npm run build -- --base-href=/app-portal/
+        # WICHTIG: Ersetzen Sie /app-portal/ durch Ihren echten Repository-Namen!
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
