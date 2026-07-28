@@ -52,7 +52,7 @@ export class JobAppService {
       // 5. Nur die gefilterten API-Jobs mit dem JavaScript-Standard .map() umbauen   
       
       const mappedApiJobs: Job[] = filteredApiJobs.map( (apiJob: any, index: number) => ({         
-        id: (index + 1).toString(), 
+        id: (index + 11).toString(), 
         title: apiJob.title, 
         department: (apiJob.tags && apiJob.tags.length > 0) ? apiJob.tags.join(","): 'Softwareentwicklung',
         location: apiJob.location, 
