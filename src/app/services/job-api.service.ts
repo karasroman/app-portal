@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom} from 'rxjs';
 import { Job } from '../models/job.model'; 
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment.dev';
  
 @Injectable({ 
   providedIn: 'root' 
