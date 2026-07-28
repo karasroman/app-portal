@@ -26,17 +26,18 @@ export class JobAppService {
 
     try {
       // 1. Erst das nackte API-Ergebnis per await abholen
-      const response: any = await firstValueFrom(this.http.get<any>(this.apiUrl));
+      //const response: any = await firstValueFrom(this.http.get<any>(this.apiUrl));
       
       // 2. Sicherstellen, dass das Daten-Array existiert
-      const apiJobsArray = response?.data || [];
+      //const apiJobsArray = response?.data || [];
       let localJobArray: Job[] = [];
+      let mappedApiJobs: Job[]= [];
       // 3. Definition der erlaubten Tech-Filterbegriffe (Kleingeschrieben für sicheren Vergleich)
       const allowedKeywords = [
-        'softwareentwicklung', 'php', 'javascript', 'frontend',
+        'softwareentwicklung', 'php', 'javascript', 'frontend','react','angular',
         'Software Developer','Software Development','Fullstack Entwickler'
       ];
-
+     /*
       // 4. Echte API-Jobs vorfiltern (bevor wir sie transformieren)
       const filteredApiJobs = apiJobsArray.filter((apiJob: any) => {
         const title = (apiJob.title || '').toLowerCase();
@@ -46,13 +47,13 @@ export class JobAppService {
 
         // Prüfen, ob mindestens eines unserer Keywords im Job vorkommt
         return allowedKeywords.some(keyword => 
-          title.includes(keyword) || description.includes(keyword) || tagsString.includes(keyword) );
+          (title.includes(keyword) || description.includes(keyword) || tagsString.includes(keyword)) && title !=='' );
       });
       console.log('Gefilterte API-Jobs Anzahl:', filteredApiJobs.length);
       // 5. Nur die gefilterten API-Jobs mit dem JavaScript-Standard .map() umbauen   
       
       const mappedApiJobs: Job[] = filteredApiJobs.map( (apiJob: any, index: number) => ({         
-        id: (index + 1).toString(), 
+        id: (index + 11).toString(), 
         title: apiJob.title, 
         department: (apiJob.tags && apiJob.tags.length > 0) ? apiJob.tags.join(","): 'Softwareentwicklung',
         location: apiJob.location, 
@@ -60,7 +61,7 @@ export class JobAppService {
         requirements: apiJob.job_types ? [...apiJob.tags,...apiJob.job_types]:apiJob.tags || ['Remote Experience', 'Tech Stack'], 
         isActive: true 
       }) );       
-      
+      */
       // 6. Lokale JSON-Datei laden (Deine Test-Jobs)      
 
       try {
